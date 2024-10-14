@@ -16,10 +16,10 @@ use App\Http\Controllers\Api\ExplorerController;
 */
 
 Route::post('/explorers', [ExplorerController::class, 'store'])->name('explorers.store');
-Route::put('explorers/{id}', [ExplorerController::class], 'update')->name('explorers.update');
-Route::get('explorers/{id}/inventario', [ExplorerController::class], 'addItem')->name('explorers.addItem');
-Route::post('explorers/trocar', [ExplorerController::class], 'trocar')->name('explorers.trocar');
-Route::get('explorers/{id}', [ExplorerController::class], 'show')->name('explorers.show');
+Route::put('explorers/{id}', [ExplorerController::class, 'update'])->name('explorers.update');
+Route::post('explorers/inventario', [ExplorerController::class, 'addItems'])->name('explorers.addItems');
+Route::post('explorers/trocar', [ExplorerController::class, 'trocar'])->name('explorers.trocar');
+Route::get('explorers/{id}', [ExplorerController::class, 'show'])->name('explorers.show');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

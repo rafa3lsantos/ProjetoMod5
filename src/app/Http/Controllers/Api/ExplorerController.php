@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Explorer;
+use App\Models\Items;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
@@ -48,4 +49,23 @@ class ExplorerController extends Controller
             'explorer' => $explorer
         ]);
     }
+
+    public function addItems(Request $request)
+    {
+        $arrayRequest = $request->validate([
+            'nome' => 'required|string|min:3|max:255',
+            'valor' => 'required|numeric',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'idExplorer' => 'required|integer'
+        ]);
+
+        $item = Items::create($arrayRequest);
+
+        return response()->json([
+            'message' => "Item adicionado ao inventario!",
+            'item' => $item
+        ]);
+    }
+
 }
